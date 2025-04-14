@@ -1,5 +1,5 @@
 const { Products , Orders,OrderItems} = require('../models')
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 
 const createProduct = async (req, res) => {
    try {
@@ -136,14 +136,33 @@ const fetchspecificitems = async (req, res) => {
    }
 }
 
+const limitedData=async(req,res)=>{
+   try {
+      
+        const prodt=await Products.findAll({
+               limit:5
+        })
+
+        return res.status(200).json(prodt)
+
+   } catch (error) {
+      return res.status(400).json({ error: error.message })
+      
+   }
+}
 
 
 
 module.exports = {
    createProduct,
-   getProduct, updateProduct,
-   deletePro, listingProductwithDiscount, filterOutProduct,
-   fetchOutOnlystockIn, fetchspecificitems,
+   getProduct, 
+   updateProduct,
+   deletePro, 
+   listingProductwithDiscount,
+    filterOutProduct,
+   fetchOutOnlystockIn, 
+   fetchspecificitems,
+   limitedData
 
 
 }

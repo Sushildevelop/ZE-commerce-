@@ -3,7 +3,7 @@ const { register, userlogin, getToken, sendEmail } = require('../controller/user
 const { upload } = require('../middleware/upload')
 const { authorization, authorizeRole } = require('../middleware/authToken')
 const { placeOrder, cancelOrder } = require('../controller/orderController')
-const { createProduct, getProduct, updateProduct, deletePro, listingProductwithDiscount, filterOutProduct, fetchOutOnlystockIn, fetchspecificitems, order_and_product } = require('../controller/productController')
+const { createProduct, getProduct, updateProduct, deletePro, listingProductwithDiscount, filterOutProduct, fetchOutOnlystockIn, fetchspecificitems, order_and_product, limitedData } = require('../controller/productController')
 const { getOrderItems } = require('../controller/orderitemsController')
 const { placeOrder1 } = require('../controller/order2Controller')
 const { createAddress, updateAddress, deleteAddress, getAddresses } = require('../controller/addressController')
@@ -31,6 +31,7 @@ router.get('/list-discount',listingProductwithDiscount)
 router.get('/filter-name',filterOutProduct)
 router.get('/filter-stock',fetchOutOnlystockIn)
 router.get('/fetchspecific',fetchspecificitems)
+router.get('/limited-data',limitedData)
 
 
 

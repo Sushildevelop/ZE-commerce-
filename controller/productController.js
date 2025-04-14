@@ -1,4 +1,5 @@
 const { Products } = require('../models')
+const { Op } = require('sequelize');
 
 const createProduct = async (req, res) => {
    try {
@@ -77,4 +78,69 @@ if (deletepro) {
    }
 }
 
-module.exports = { createProduct ,getProduct,updateProduct,deletePro}
+const listingProductwithDiscount=async(req,res)=>{
+   try {
+      const productDiscount=await Products.findAll({
+         where :{discount:{
+            [Op.ne]:null,
+            [Op.between]: [51, 60], 
+         }}
+      })
+
+      return res.status(200).json(productDiscount)
+
+
+      
+   } catch (error) {
+      return res.status(400).json({ error: error.message })
+      
+   }
+}
+
+const filterOutProduct=async(req,res)=>{
+   try {
+      const prodt=await Products.findAll()
+      const filterout=prodt.map(user=>user.name)
+      return res.status(200).json(filterout)
+   } catch (error) {
+      return res.status(400).json({ error: error.message })
+   }
+}
+
+const fetchOutOnlystockIn=async(req,res)=>{
+   try {
+      const prodt=await Products.findAll()
+      const filterStockIn=prodt.filter(user=>user.stock >0)
+      return res.status(200).json(filterStockIn)
+      
+   } catch (error) {
+      return res.status(400).json({ error: error.message })
+   }
+}
+
+const fetchspecificitems=async(req,res)=>{
+   try {
+      const prodt=await Products.findAll({
+         where:{
+            name:{
+               [Op.in]: ["Bata","Table"]
+            }
+         }
+      })
+      return res.status(200).json(prodt)
+   } catch (error) {
+      return res.status(400).json({ error: error.message })
+      
+   }
+}
+
+
+ 
+
+module.exports = {
+   createProduct ,
+   getProduct,updateProduct,
+   deletePro , listingProductwithDiscount, filterOutProduct,
+   fetchOutOnlystockIn , fetchspecificitems
+
+}

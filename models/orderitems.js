@@ -5,6 +5,7 @@ module.exports = (sequelize) => {
     static associate(models) {
       OrderItems.belongsTo(models.Orders, { foreignKey: 'orderId' });
       OrderItems.belongsTo(models.Products, { foreignKey: 'productId' });
+      
     }
   }
 

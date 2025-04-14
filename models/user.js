@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
       Users.hasMany(models.Addresses, { foreignKey: 'userId' });
     //   Users.hasMany(models.Products, { foreignKey: 'userId' });
     //   Users.hasMany(models.Addresses);
-    //   Users.hasMany(models.Carts);
+      Users.hasMany(models.Carts, { foreignKey: 'userId' });
     }
   }
 

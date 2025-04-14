@@ -7,6 +7,7 @@ const { createProduct, getProduct, updateProduct, deletePro } = require('../cont
 const { getOrderItems } = require('../controller/orderitemsController')
 const { placeOrder1 } = require('../controller/order2Controller')
 const { createAddress, updateAddress, deleteAddress, getAddresses } = require('../controller/addressController')
+const { addToCart } = require('../controller/cartController')
 
 const router=express.Router()
 
@@ -41,6 +42,8 @@ router.put('/update/:id',authorization,updateAddress)
 router.delete('/delete/:id',authorization,deleteAddress)
 router.get('/getadd',authorization,getAddresses)
 
+// Cart
+router.post('/addcart',authorization,addToCart)
 
 
 

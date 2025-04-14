@@ -6,6 +6,7 @@ module.exports = (sequelize) => {
       // Products.belongsToMany(models.Users, { through: models.Carts });
       Products.hasMany(models.OrderItems, { foreignKey: 'productId' });
       Products.hasMany(models.Carts,{foreignKey:"productId"});
+      Products.hasMany(models.Orders)
     }
   }
 
